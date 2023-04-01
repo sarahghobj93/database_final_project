@@ -3,7 +3,12 @@ from django.contrib import admin
 from .models import Course, Lesson, Instructor, Learner
 
 # <HINT> Register QuestionInline and ChoiceInline classes here
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 3
 
+class QuestionInline(admin.ModelAdmin):
+    inlines = [ChoiceInline]
 
 class LessonInline(admin.StackedInline):
     model = Lesson
@@ -28,3 +33,5 @@ admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Instructor)
 admin.site.register(Learner)
+admin.site.register(Question, QuestionInline)
+admin.site.register(Choice, ChoiceInline)
